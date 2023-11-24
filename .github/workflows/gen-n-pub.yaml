@@ -8,9 +8,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-      - name: Install Nix
-        uses: cachix/install-nix-action@v22
+      - uses: cachix/install-nix-action@v22
+      - uses: DeterminateSystems/magic-nix-cache-action@main
 
       - name: Generate api
         run: ./build.nix.sh
+
+      - name: Push
+        run: |
+          version=v$(curl https://raw.githubusercontent.com/onpremless/api/master/openapi.yaml 2> /dev/null | grep -e "version: '.*'" | cut -d\' -f 2)
+          git config --global user.name "Ilya Sumbatyants"
+          git config --global user.email "sumboid@users.noreply.github.com"
+          git commit -am "Generate api ${version}"
+          git tag ${version} -m "Generate api ${version}"
+          git push origin master
+          git push origin ${version}
