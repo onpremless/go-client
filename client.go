@@ -3,7 +3,7 @@ onpremless
 
 onpremless api
 
-API version: 1.0.0
+API version: 1.0.1
 Contact: ilya.sumb@gmail.com
 */
 
@@ -42,7 +42,7 @@ var (
 	queryDescape    = strings.NewReplacer( "%5B", "[", "%5D", "]" )
 )
 
-// APIClient manages communication with the onpremless API v1.0.0
+// APIClient manages communication with the onpremless API v1.0.1
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
