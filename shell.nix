@@ -3,6 +3,7 @@
    packages = with pkgs; [
      go
      openapi-generator-cli
+     wget
    ];
 }
 
